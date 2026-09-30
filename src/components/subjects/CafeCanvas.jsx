@@ -1,10 +1,11 @@
 import { useMemo, useState } from "react";
-import { CheckCircle2, Circle, Images, Plus, Trash2 } from "lucide-react";
+import { CheckCircle2, Circle, Images, Trash2 } from "lucide-react";
 import { useLocalStorage } from "../../lib/useLocalStorage";
 import { useSyncProgress } from "../../lib/useSyncProgress";
 import { makeId } from "../../lib/id";
 import { ZONE_DEFS, ZONES_SEED, ASSET_VAULT_SEED } from "../../data/seedData";
 import { TagPill } from "../TagPill";
+import { Button, Divider } from "../../lib/ds";
 
 // Solid pastel tones (no dark: opacity variants — Tailwind's cascade
 // doesn't reliably order a solid base class against an opacity-modified
@@ -69,6 +70,9 @@ export function CafeCanvas({ subject }) {
         <p className="mt-1 text-sm text-ink-soft dark:text-ink-soft-dark">
           Four operational pillars of the commune — select a tile to work its milestones.
         </p>
+        <div className="mt-3">
+          <Divider />
+        </div>
 
         <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
           {ZONE_DEFS.map((zone, i) => {
@@ -130,9 +134,9 @@ export function CafeCanvas({ subject }) {
                 placeholder="Add a vision milestone…"
                 className="flex-1 rounded-sm border border-line dark:border-line-dark bg-transparent px-3 py-1.5 text-sm outline-none focus:border-graphite dark:focus:border-accent"
               />
-              <button type="submit" className="rounded-sm bg-graphite px-3 py-1.5 text-sm font-medium text-white hover:opacity-90 dark:bg-accent dark:text-ink">
-                <Plus size={14} />
-              </button>
+              <Button type="submit" variant="secondary">
+                Add
+              </Button>
             </form>
           </div>
         )}
@@ -146,6 +150,9 @@ export function CafeCanvas({ subject }) {
         <p className="mt-1 text-sm text-ink-soft dark:text-ink-soft-dark">
           Photos, spatial layouts, and furniture concepts — paste an image URL or just drop a note.
         </p>
+        <div className="mt-3">
+          <Divider />
+        </div>
 
         <form onSubmit={addAsset} className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
           <input
@@ -177,10 +184,9 @@ export function CafeCanvas({ subject }) {
               </option>
             ))}
           </select>
-          <button type="submit" className="flex items-center justify-center gap-1 rounded-sm bg-graphite px-3 py-2 text-sm font-medium text-white hover:opacity-90">
-            <Plus size={15} />
+          <Button type="submit" variant="primary" className="w-full sm:w-auto">
             Add to vault
-          </button>
+          </Button>
         </form>
 
         <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">

@@ -1,10 +1,11 @@
 import { useMemo, useState } from "react";
-import { ChevronLeft, ChevronRight, FileText, Plus, Trash2, Users } from "lucide-react";
+import { ChevronLeft, ChevronRight, FileText, Trash2, Users } from "lucide-react";
 import { useLocalStorage } from "../../lib/useLocalStorage";
 import { useSyncProgress } from "../../lib/useSyncProgress";
 import { makeId } from "../../lib/id";
 import { KANBAN_COLUMNS, KANBAN_SEED, SPEC_SHEET_SEED } from "../../data/seedData";
 import { TagPill } from "../TagPill";
+import { Button, Divider } from "../../lib/ds";
 
 export function PortfolioBoard({ subject }) {
   const [cards, setCards] = useLocalStorage(`lc:kanban:${subject.id}`, KANBAN_SEED);
@@ -78,6 +79,9 @@ export function PortfolioBoard({ subject }) {
         <p className="mt-1 text-sm text-ink-soft dark:text-ink-soft-dark">
           Kanban board — drag isn't wired up, use the arrows to move cards through the pipeline.
         </p>
+        <div className="mt-3">
+          <Divider />
+        </div>
 
         <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
           {KANBAN_COLUMNS.map((col) => {
@@ -168,13 +172,9 @@ export function PortfolioBoard({ subject }) {
               </option>
             ))}
           </select>
-          <button
-            type="submit"
-            className="flex items-center gap-1 rounded-sm bg-primary px-3 py-2 text-sm font-medium text-white hover:opacity-90"
-          >
-            <Plus size={15} />
+          <Button type="submit" variant="primary">
             Add
-          </button>
+          </Button>
         </form>
       </section>
 
@@ -237,12 +237,11 @@ export function PortfolioBoard({ subject }) {
               placeholder="What's included"
               className="col-span-2 rounded-sm border border-line dark:border-line-dark bg-transparent px-2 py-1.5 text-xs outline-none focus:border-primary"
             />
-            <button
-              type="submit"
-              className="col-span-2 rounded-sm bg-primary py-1.5 text-xs font-medium text-white hover:opacity-90"
-            >
-              + Add package
-            </button>
+            <div className="col-span-2">
+              <Button type="submit" variant="secondary" className="w-full">
+                Add package
+              </Button>
+            </div>
           </form>
         </div>
 
@@ -271,9 +270,9 @@ export function PortfolioBoard({ subject }) {
               placeholder="Add page"
               className="flex-1 rounded-sm border border-line dark:border-line-dark bg-transparent px-2 py-1.5 text-xs outline-none focus:border-primary"
             />
-            <button type="submit" className="rounded-sm bg-primary px-2.5 py-1.5 text-xs font-medium text-white hover:opacity-90">
-              +
-            </button>
+            <Button type="submit" variant="secondary">
+              Add
+            </Button>
           </form>
         </div>
       </aside>

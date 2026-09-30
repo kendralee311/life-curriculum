@@ -1,9 +1,10 @@
 import { useMemo, useState } from "react";
-import { Cpu, Plus, Table2, Trash2 } from "lucide-react";
+import { Cpu, Table2, Trash2 } from "lucide-react";
 import { useLocalStorage } from "../../lib/useLocalStorage";
 import { useSyncProgress } from "../../lib/useSyncProgress";
 import { makeId } from "../../lib/id";
 import { HARDWARE_STATES, COMPONENTS_SEED, BOM_SEED } from "../../data/seedData";
+import { Button, Divider } from "../../lib/ds";
 
 const stateIndex = (id) => HARDWARE_STATES.findIndex((s) => s.id === id);
 
@@ -64,6 +65,9 @@ export function HardwareLab({ subject }) {
         <p className="mt-1 text-sm text-ink-soft dark:text-ink-soft-dark">
           Click a state pill to cycle it forward through the testing log.
         </p>
+        <div className="mt-3">
+          <Divider />
+        </div>
 
         <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
           {components.map((c) => {
@@ -113,10 +117,9 @@ export function HardwareLab({ subject }) {
             placeholder="One-line description"
             className="min-w-[160px] flex-1 rounded-sm border border-line dark:border-line-dark bg-transparent px-3 py-2 text-sm outline-none focus:border-graphite dark:focus:border-accent"
           />
-          <button type="submit" className="flex items-center gap-1 rounded-sm bg-graphite px-3 py-2 text-sm font-medium text-white hover:opacity-90">
-            <Plus size={15} />
+          <Button type="submit" variant="primary">
             Add
-          </button>
+          </Button>
         </form>
       </section>
 
@@ -124,6 +127,9 @@ export function HardwareLab({ subject }) {
         <div className="flex items-center gap-2">
           <Table2 size={16} className="text-graphite dark:text-ink-dark" />
           <h2 className="font-display text-xl font-bold uppercase tracking-tight">Bill of Materials &amp; Pins Log</h2>
+        </div>
+        <div className="mt-3">
+          <Divider />
         </div>
 
         <div className="mt-4 overflow-x-auto">
@@ -179,9 +185,11 @@ export function HardwareLab({ subject }) {
               className="rounded-sm border border-line dark:border-line-dark bg-transparent px-2 py-1.5 text-xs outline-none focus:border-graphite dark:focus:border-accent"
             />
           ))}
-          <button type="submit" className="col-span-2 rounded-sm bg-graphite px-3 py-1.5 text-xs font-medium text-white hover:opacity-90 sm:col-span-3 lg:col-span-6">
-            + Add row
-          </button>
+          <div className="col-span-2 sm:col-span-3 lg:col-span-6">
+            <Button type="submit" variant="secondary" className="w-full">
+              Add row
+            </Button>
+          </div>
         </form>
       </section>
     </div>

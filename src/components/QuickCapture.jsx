@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Sparkles, X } from "lucide-react";
+import { X } from "lucide-react";
 import { useApp } from "../context/AppContext";
+import { Button } from "../lib/ds";
 
 export function QuickCapture() {
   const { subjects, addTask } = useApp();
@@ -19,13 +20,9 @@ export function QuickCapture() {
 
   return (
     <>
-      <button
-        onClick={() => setOpen(true)}
-        className="fixed bottom-6 right-6 z-30 flex items-center gap-2 rounded-sm bg-primary px-4 py-3 text-sm font-medium text-white shadow-lg hover:opacity-90"
-      >
-        <Sparkles size={16} />
+      <Button onClick={() => setOpen(true)} variant="accent" className="fixed bottom-6 right-6 z-30 shadow-lg">
         Capture idea
-      </button>
+      </Button>
 
       {open && (
         <div
@@ -71,9 +68,9 @@ export function QuickCapture() {
                 <option value="medium">Medium priority</option>
                 <option value="low">Low priority</option>
               </select>
-              <button type="submit" className="w-full rounded-sm bg-primary py-2 text-sm font-medium text-white hover:opacity-90">
+              <Button type="submit" variant="primary" className="w-full">
                 Add to schedule
-              </button>
+              </Button>
             </form>
           </div>
         </div>

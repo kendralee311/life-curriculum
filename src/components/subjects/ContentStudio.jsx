@@ -4,6 +4,7 @@ import { useLocalStorage } from "../../lib/useLocalStorage";
 import { useSyncProgress } from "../../lib/useSyncProgress";
 import { makeId } from "../../lib/id";
 import { IDEA_INCUBATOR_SEED, PIPELINE_STAGES, PIPELINE_SEED, SCRATCHPAD_SEED } from "../../data/seedData";
+import { Button, Divider } from "../../lib/ds";
 
 const SUBTASK_LABELS = { hook: "Hook", broll: "B-roll list", voiceover: "Voiceover", thumbnail: "Thumbnail" };
 const FORMAT_TAGS = ["#short-form", "#vlog", "#dev-log"];
@@ -81,6 +82,9 @@ export function ContentStudio({ subject }) {
             <h2 className="font-display text-lg font-bold uppercase tracking-tight">Idea Incubator</h2>
           </div>
           <p className="mt-1 text-sm text-ink-soft dark:text-ink-soft-dark">Raw ideas before they earn a spot on the board.</p>
+          <div className="mt-3">
+            <Divider />
+          </div>
           <form onSubmit={addIdea} className="mt-3 flex gap-2">
             <input
               value={ideaDraft}
@@ -143,6 +147,9 @@ export function ContentStudio({ subject }) {
       <section className="card-surface rounded-sm p-5">
         <h2 className="font-display text-xl font-bold uppercase tracking-tight">Production Pipeline</h2>
         <p className="mt-1 text-sm text-ink-soft dark:text-ink-soft-dark">Idea → Scripted → Filming → Editing → Scheduled → Published.</p>
+        <div className="mt-3">
+          <Divider />
+        </div>
 
         <div className="mt-4 flex gap-3 overflow-x-auto pb-2">
           {PIPELINE_STAGES.map((stage) => {
@@ -217,10 +224,9 @@ export function ContentStudio({ subject }) {
               </option>
             ))}
           </select>
-          <button type="submit" className="flex items-center gap-1 rounded-sm bg-info px-3 py-2 text-sm font-medium text-white hover:opacity-90">
-            <Plus size={15} />
+          <Button type="submit" variant="primary">
             Add
-          </button>
+          </Button>
         </form>
       </section>
     </div>

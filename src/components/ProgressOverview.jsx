@@ -10,6 +10,7 @@ import { Award } from "lucide-react";
 import { useApp } from "../context/AppContext";
 import { ProgressRing } from "./ProgressRing";
 import { colorClasses } from "../lib/colors";
+import { Divider } from "../lib/ds";
 
 export function ProgressOverview() {
   const { subjects } = useApp();
@@ -33,6 +34,9 @@ export function ProgressOverview() {
       <p className="mt-1 text-sm text-ink-soft dark:text-ink-soft-dark">
         Overall progress toward launching the business and building the venue.
       </p>
+      <div className="mt-3">
+        <Divider />
+      </div>
 
       <div className="mt-5 grid grid-cols-1 gap-6 sm:grid-cols-[auto_1fr] sm:items-center">
         <div className="flex justify-center">

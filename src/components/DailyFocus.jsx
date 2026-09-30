@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Check, ListTodo, Plus, Trash2 } from "lucide-react";
+import { Check, ListTodo, Trash2 } from "lucide-react";
 import { useApp } from "../context/AppContext";
 import { colorClasses, PRIORITY_STYLES } from "../lib/colors";
+import { Button, Divider } from "../lib/ds";
 
 const PRIORITY_ORDER = { high: 0, medium: 1, low: 2 };
 
@@ -46,6 +47,9 @@ export function DailyFocus() {
       <p className="mt-1 text-sm text-ink-soft dark:text-ink-soft-dark">
         Top priorities across every subject — check them off as you go.
       </p>
+      <div className="mt-3">
+        <Divider />
+      </div>
 
       <ul className="mt-4 space-y-2">
         {sorted.map((task) => {
@@ -128,13 +132,9 @@ export function DailyFocus() {
           <option value="medium">Medium</option>
           <option value="low">Low</option>
         </select>
-        <button
-          type="submit"
-          className="flex items-center gap-1 rounded-sm bg-primary px-3 py-2 text-sm font-medium text-white hover:opacity-90"
-        >
-          <Plus size={15} />
+        <Button type="submit" variant="primary">
           Add
-        </button>
+        </Button>
       </form>
     </section>
   );
