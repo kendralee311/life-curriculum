@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-paper: #faf8f2;
+  --color-paper-raised: #ffffff;
+  --color-ink: #17171c;
+  --color-ink-soft: #52525b;
+  --color-line: #e4e0d6;
+
+  --color-paper-dark: #0c0c10;
+  --color-paper-raised-dark: #151519;
+  --color-ink-dark: #f3f1e9;
+  --color-ink-soft-dark: #9a9aa2;
+  --color-line-dark: #232329;
+
+  --color-brand: #2c3a8c;
+  --color-brand-soft: #e7e9f7;
+  --color-clay: #c1502e;
+  --color-clay-soft: #f8e4da;
+  --color-sage: #6f8763;
+  --color-sage-soft: #e6ece2;
+  --color-gold: #b8862e;
+  --color-gold-soft: #f5ead2;
+}
+
+html {
+  color-scheme: light;
+}
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+.dark body {
+  background-color: var(--color-paper-dark);
+  color: var(--color-ink-dark);
+}
+
+@layer utilities {
+  .bg-dot-grid {
+    background-image: radial-gradient(rgba(23, 23, 28, 0.14) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  .dark .bg-dot-grid {
+    background-image: radial-gradient(rgba(243, 241, 233, 0.14) 1px, transparent 1px);
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  .card-surface {
+    background-color: var(--color-paper-raised);
+    border: 1px solid var(--color-line);
+  }
+  .dark .card-surface {
+    background-color: var(--color-paper-raised-dark);
+    border-color: var(--color-line-dark);
+  }
+}
+
+::selection {
+  background-color: var(--color-brand);
+  color: white;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line) transparent;
+}
+.dark * {
+  scrollbar-color: var(--color-line-dark) transparent;
+}
