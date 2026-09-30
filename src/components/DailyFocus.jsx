@@ -28,16 +28,16 @@ export function DailyFocus() {
   }
 
   return (
-    <section className="card-surface rounded-2xl p-5 sm:p-6">
+    <section className="card-surface rounded-sm p-5 sm:p-6">
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-2">
-          <ListTodo size={18} className="text-brand" />
-          <h2 className="font-display text-lg font-semibold">Today's Class Schedule</h2>
+          <ListTodo size={18} className="text-primary" />
+          <h2 className="font-display text-xl font-bold uppercase tracking-tight">Today's Class Schedule</h2>
         </div>
         {completedCount > 0 && (
           <button
             onClick={clearCompletedTasks}
-            className="text-xs font-mono text-ink-soft dark:text-ink-soft-dark hover:text-clay"
+            className="font-mono text-xs text-ink-soft dark:text-ink-soft-dark hover:text-info"
           >
             clear {completedCount} done
           </button>
@@ -55,43 +55,39 @@ export function DailyFocus() {
           return (
             <li
               key={task.id}
-              className={`group flex items-center gap-3 rounded-xl border border-line dark:border-line-dark px-3 py-2.5 ${
+              className={`group flex items-center gap-3 rounded-sm border border-line dark:border-line-dark px-3 py-2.5 ${
                 task.done ? "opacity-50" : ""
               }`}
             >
               <button
                 onClick={() => toggleTask(task.id)}
                 aria-label="Toggle done"
-                className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-md border transition-colors ${
-                  task.done
-                    ? "border-brand bg-brand text-white"
-                    : "border-line dark:border-line-dark"
+                className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-sm border transition-colors ${
+                  task.done ? "border-primary bg-primary text-white" : "border-line dark:border-line-dark"
                 }`}
               >
                 {task.done && <Check size={13} strokeWidth={3} />}
               </button>
 
-              <span className={`flex-1 text-sm ${task.done ? "line-through" : ""}`}>
-                {task.title}
-              </span>
+              <span className={`flex-1 text-sm ${task.done ? "line-through" : ""}`}>{task.title}</span>
 
               {subject && (
                 <span
-                  className={`hidden sm:inline-flex items-center gap-1.5 rounded-full ${c.bgSoft} px-2 py-0.5 text-[11px] font-mono ${c.text}`}
+                  className={`hidden sm:inline-flex items-center gap-1.5 rounded-sm ${c.bgSoft} px-2 py-0.5 text-[11px] font-mono ${c.chipText}`}
                 >
                   <span className={`h-1.5 w-1.5 rounded-full ${c.dot}`} />
                   {subject.code}
                 </span>
               )}
 
-              <span className={`rounded-full ${pri.bg} px-2 py-0.5 text-[11px] font-medium ${pri.text}`}>
+              <span className={`rounded-sm ${pri.bg} px-2 py-0.5 text-[11px] font-medium ${pri.text}`}>
                 {pri.label}
               </span>
 
               <button
                 onClick={() => deleteTask(task.id)}
                 aria-label="Delete task"
-                className="text-ink-soft dark:text-ink-soft-dark opacity-0 transition-opacity hover:text-clay group-hover:opacity-100"
+                className="text-ink-soft dark:text-ink-soft-dark opacity-0 transition-opacity hover:text-info group-hover:opacity-100"
               >
                 <Trash2 size={14} />
               </button>
@@ -99,7 +95,7 @@ export function DailyFocus() {
           );
         })}
         {sorted.length === 0 && (
-          <li className="rounded-xl border border-dashed border-line dark:border-line-dark px-3 py-6 text-center text-sm text-ink-soft dark:text-ink-soft-dark">
+          <li className="rounded-sm border border-dashed border-line dark:border-line-dark px-3 py-6 text-center text-sm text-ink-soft dark:text-ink-soft-dark">
             No priorities queued — add your first below.
           </li>
         )}
@@ -110,12 +106,12 @@ export function DailyFocus() {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Add a high-impact task for today…"
-          className="min-w-[180px] flex-1 rounded-lg border border-line dark:border-line-dark bg-transparent px-3 py-2 text-sm outline-none focus:border-brand"
+          className="min-w-[180px] flex-1 rounded-sm border border-line dark:border-line-dark bg-transparent px-3 py-2 text-sm outline-none focus:border-primary"
         />
         <select
           value={subjectId}
           onChange={(e) => setSubjectId(e.target.value)}
-          className="rounded-lg border border-line dark:border-line-dark bg-transparent px-2 py-2 text-sm outline-none focus:border-brand"
+          className="rounded-sm border border-line dark:border-line-dark bg-transparent px-2 py-2 text-sm outline-none focus:border-primary"
         >
           {subjects.map((s) => (
             <option key={s.id} value={s.id}>
@@ -126,7 +122,7 @@ export function DailyFocus() {
         <select
           value={priority}
           onChange={(e) => setPriority(e.target.value)}
-          className="rounded-lg border border-line dark:border-line-dark bg-transparent px-2 py-2 text-sm outline-none focus:border-brand"
+          className="rounded-sm border border-line dark:border-line-dark bg-transparent px-2 py-2 text-sm outline-none focus:border-primary"
         >
           <option value="high">High</option>
           <option value="medium">Medium</option>
@@ -134,7 +130,7 @@ export function DailyFocus() {
         </select>
         <button
           type="submit"
-          className="flex items-center gap-1 rounded-lg bg-brand px-3 py-2 text-sm font-medium text-white hover:opacity-90"
+          className="flex items-center gap-1 rounded-sm bg-primary px-3 py-2 text-sm font-medium text-white hover:opacity-90"
         >
           <Plus size={15} />
           Add

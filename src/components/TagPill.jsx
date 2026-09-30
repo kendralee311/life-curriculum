@@ -4,10 +4,10 @@ export function TagPill({ tag, active, onClick, size = "sm" }) {
   return (
     <Comp
       onClick={onClick}
-      className={`${sizeClass} font-mono rounded-full border transition-colors ${
+      className={`${sizeClass} font-mono rounded-sm border transition-colors ${
         active
-          ? "border-brand bg-brand text-white dark:border-brand"
-          : "border-line dark:border-line-dark text-ink-soft dark:text-ink-soft-dark hover:border-brand hover:text-brand"
+          ? "border-primary bg-primary text-white dark:border-primary"
+          : "border-line dark:border-line-dark text-ink-soft dark:text-ink-soft-dark hover:border-primary hover:text-primary"
       }`}
     >
       {tag}

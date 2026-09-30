@@ -1,186 +1,218 @@
-// Dummy sample data so the app feels alive on first load.
-// Everything here is copied into localStorage on first run and
-// then owned entirely by the user's edits from that point on.
+// Dummy sample data so the app feels alive on first load. Copied into
+// localStorage on first run; owned entirely by the user's edits after that.
 
 export const SUBJECT_DEFS = [
   {
     id: "portfolio-web",
     code: "ARCH 401",
     name: "Portfolio & Web Business",
+    shortName: "Portfolio & Web",
     tagline: "Studio site, case studies, first paying clients.",
     vision:
       "Turn six years of spatial-architecture thinking into a productized web design practice: a portfolio that proves the Physical x Digital angle, and a pipeline that turns strangers into clients.",
-    color: "brand",
+    color: "primary",
     goal: "Launch studio site + land first paid client",
-    progress: 58,
-    milestones: [
-      { id: "m1", label: "Define service tiers & pricing", done: true },
-      { id: "m2", label: "Case study: Local Bakery Rebrand", done: true },
-      { id: "m3", label: "Case study: 3D Product Website", done: false },
-      { id: "m4", label: "Launch studio site v1", done: false },
-      { id: "m5", label: "Land first paid client", done: false },
-    ],
+    progress: 33,
   },
   {
     id: "content",
     code: "MEDIA 210",
     name: "Content Creation",
+    shortName: "Content Creation",
     tagline: "Micro-tutorials and candid studio-build storytelling.",
     vision:
       "Document the studio build in real time — high-energy voiceovers on moving to Hong Kong, paired with fast 3D/UI micro-tutorials that prove the multi-disciplinary angle.",
-    color: "clay",
+    color: "info",
     goal: "Consistent 2x/week posting with a repeatable format",
-    progress: 41,
-    milestones: [
-      { id: "m1", label: "Define 3 repeatable formats", done: true },
-      { id: "m2", label: "Batch-film 10 micro-tutorials", done: false },
-      { id: "m3", label: "Hit 2x/week publish cadence", done: false },
-      { id: "m4", label: "First format hits repeatable traction", done: false },
-    ],
+    progress: 20,
   },
   {
     id: "hardware",
     code: "SPTECH 330",
     name: "Physical Hardware & Spatial Tech",
+    shortName: "Hardware & Spatial",
     tagline: "Tactile micro-animations, sensors, phygital prototypes.",
     vision:
       "Prototype the physical/digital bridge for real — tactile interfaces, embedded sensors, and small hardware builds that make FIELD's phygital app concept touchable.",
-    color: "sage",
+    color: "graphite",
     goal: "Working phygital prototype demo",
-    progress: 22,
-    milestones: [
-      { id: "m1", label: "Research sensor + microcontroller stack", done: true },
-      { id: "m2", label: "Order prototyping kit", done: false },
-      { id: "m3", label: "Build first tactile interaction demo", done: false },
-      { id: "m4", label: "Pair demo with FIELD app screen", done: false },
-    ],
+    progress: 38,
   },
   {
     id: "cafe",
     code: "VENTURE 500",
     name: "Future Vision: Listening Cafe Commune",
+    shortName: "Cafe Commune",
     tagline: "Spatial design, furniture, and event programming.",
     vision:
       "The long arc: a physical listening-cafe commune in Hong Kong — spatial layout, custom furniture, and an events program that turns the studio's audience into a real-world community.",
-    color: "gold",
+    color: "accent",
     goal: "Concept deck + site scouting shortlist",
-    progress: 9,
-    milestones: [
-      { id: "m1", label: "Write concept one-pager", done: true },
-      { id: "m2", label: "Mood board: spatial + furniture direction", done: false },
-      { id: "m3", label: "Shortlist 3 candidate neighborhoods", done: false },
-      { id: "m4", label: "Draft events programming outline", done: false },
-    ],
+    progress: 38,
   },
 ];
 
-export const NOTE_SEED = {
-  "portfolio-web": [
-    {
-      id: "n1",
-      content:
-        "Portfolio triad should open with the Bakery Rebrand — it's the most legible 'before/after' for a cold visitor.",
-      tags: ["#ui-design", "#content"],
-    },
-    {
-      id: "n2",
-      content:
-        "Pricing page idea: show tiers as 'course credits' — Studio 101 / 201 / 301 — matches the whole Life Curriculum framing.",
-      tags: ["#ui-design"],
-    },
-    {
-      id: "n3",
-      content:
-        "Client intake friction: people don't know if they need a 3D site or a normal one. Add a 2-question quiz on the site.",
-      tags: ["#ui-design", "#content"],
-    },
+// --- 1. Portfolio & Web Business — Kanban Pipeline + Project Spec Sheet ---
+
+export const KANBAN_COLUMNS = [
+  { id: "backlog", label: "Backlog" },
+  { id: "in-progress", label: "In Progress" },
+  { id: "review", label: "Review / QC" },
+  { id: "live", label: "Live / Done" },
+];
+
+export const KANBAN_SEED = [
+  { id: "k1", title: "Hero section — 3D scroll interaction", tags: ["#hero-section"], column: "live" },
+  { id: "k2", title: "Case study: Local Bakery Rebrand", tags: ["#case-study-1"], column: "live" },
+  { id: "k3", title: "Case study: 3D Product Website copy", tags: ["#case-study-1"], column: "in-progress" },
+  { id: "k4", title: "Pricing table (course-credit framing)", tags: ["#pricing-table"], column: "review" },
+  { id: "k5", title: "Client contract template", tags: ["#client-contract"], column: "backlog" },
+  { id: "k6", title: "FIELD app case study writeup", tags: ["#case-study-1"], column: "backlog" },
+];
+
+export const SPEC_SHEET_SEED = {
+  clientAvatar:
+    "Early-stage tech/design founders in Hong Kong (or remote) who want a portfolio or product site with real spatial/architectural thinking behind the UX — not a template.",
+  packages: [
+    { id: "p1", name: "Studio 101", price: "$1.2k", desc: "1-page portfolio / landing site" },
+    { id: "p2", name: "Studio 201", price: "$3.5k", desc: "Multi-page site + case study system" },
+    { id: "p3", name: "Studio 301", price: "$7k+", desc: "3D product site / custom interaction build" },
   ],
-  content: [
-    {
-      id: "n4",
-      content:
-        "Format that's working: 'I moved to Hong Kong to build a studio' cold open + jump cut to desk setup. Candid > polished.",
-      tags: ["#content"],
-    },
-    {
-      id: "n5",
-      content:
-        "Micro-tutorial idea: 60s screen-record of building a subtle tactile hover animation in Figma, voiceover explaining the physical-material logic behind it.",
-      tags: ["#ui-design", "#content"],
-    },
-    {
-      id: "n6",
-      content:
-        "Hook bank: 'Architects would never design a building like this app is designed.'",
-      tags: ["#content"],
-    },
-  ],
-  hardware: [
-    {
-      id: "n7",
-      content:
-        "Capacitive touch strip on a wood panel, wired to trigger a screen transition — first tactile demo candidate.",
-      tags: ["#hardware", "#spatial"],
-    },
-    {
-      id: "n8",
-      content:
-        "Look into ESP32 + simple haptic motor for a 'physical notification' prototype tied to the FIELD app.",
-      tags: ["#hardware"],
-    },
-  ],
-  cafe: [
-    {
-      id: "n9",
-      content:
-        "Furniture direction: modular low seating that reconfigures for listening sessions vs. work-in-cafe mode.",
-      tags: ["#spatial"],
-    },
-    {
-      id: "n10",
-      content:
-        "Event format idea: monthly 'silent listening + sketch' night — ties spatial design crowd to design peers.",
-      tags: ["#spatial", "#content"],
-    },
-  ],
+  architecture: ["Home", "Work (Portfolio Triad)", "About / Studio", "Services", "Contact"],
 };
 
-export const TASK_SEED = [
+// --- 2. Content Creation — Idea Incubator + Production Pipeline ---
+
+export const IDEA_INCUBATOR_SEED = [
+  { id: "i1", text: "Cold open: 'I moved to Hong Kong to build a studio' → jump cut to desk setup." },
+  { id: "i2", text: "Hook: 'Architects would never design an app like this.'" },
+  { id: "i3", text: "Behind the scenes: pricing a client project on camera." },
+];
+
+export const PIPELINE_STAGES = [
+  { id: "idea", label: "Idea" },
+  { id: "scripted", label: "Scripted" },
+  { id: "filming", label: "Filming" },
+  { id: "editing", label: "Editing" },
+  { id: "scheduled", label: "Scheduled" },
+  { id: "published", label: "Published" },
+];
+
+export const PIPELINE_SEED = [
   {
-    id: "t1",
-    title: "Finish 3D Product Website case study copy",
-    subjectId: "portfolio-web",
-    priority: "high",
-    done: false,
+    id: "c1",
+    title: "Tactile hover animation micro-tutorial",
+    formatTag: "#short-form",
+    stage: "editing",
+    subtasks: { hook: true, broll: true, voiceover: true, thumbnail: false },
   },
   {
-    id: "t2",
-    title: "Film: tactile hover animation micro-tutorial",
-    subjectId: "content",
-    priority: "high",
-    done: false,
+    id: "c2",
+    title: "Studio-build vlog: first client call",
+    formatTag: "#vlog",
+    stage: "filming",
+    subtasks: { hook: true, broll: false, voiceover: false, thumbnail: false },
   },
   {
-    id: "t3",
-    title: "Order ESP32 + haptic motor prototyping kit",
-    subjectId: "hardware",
-    priority: "medium",
-    done: false,
+    id: "c3",
+    title: "How I make AI follow a design system",
+    formatTag: "#dev-log",
+    stage: "scripted",
+    subtasks: { hook: true, broll: false, voiceover: false, thumbnail: false },
   },
   {
-    id: "t4",
-    title: "Draft studio site pricing page (course-credit framing)",
-    subjectId: "portfolio-web",
-    priority: "medium",
-    done: true,
+    id: "c4",
+    title: "50 Design Styles for better prompting",
+    formatTag: "#short-form",
+    stage: "idea",
+    subtasks: { hook: false, broll: false, voiceover: false, thumbnail: false },
   },
   {
-    id: "t5",
-    title: "Sketch mood board direction for cafe seating",
-    subjectId: "cafe",
-    priority: "low",
-    done: false,
+    id: "c5",
+    title: "Bakery Rebrand before/after",
+    formatTag: "#short-form",
+    stage: "published",
+    subtasks: { hook: true, broll: true, voiceover: true, thumbnail: true },
   },
 ];
 
-export const ALL_TAGS = ["#hardware", "#spatial", "#ui-design", "#content"];
+export const SCRATCHPAD_SEED = [
+  { id: "s1", text: "'The building would never let its wiring show. Why does your app?'", createdAt: "" },
+  { id: "s2", text: "Title test: 'I redesigned my studio site live — here's what broke'", createdAt: "" },
+];
+
+// --- 3. Physical Hardware & Spatial Tech — Component Grid + BOM ---
+
+export const HARDWARE_STATES = [
+  { id: "concept", label: "Concept" },
+  { id: "parts-sourced", label: "Parts Sourced" },
+  { id: "circuit-built", label: "Circuit Built" },
+  { id: "ui-connected", label: "UI Connected" },
+  { id: "prototype-tested", label: "Prototype Tested" },
+];
+
+export const COMPONENTS_SEED = [
+  { id: "h1", name: "Motorized Stand", state: "concept", description: "Rotating display stand for phygital product demos." },
+  { id: "h2", name: "Vinyl Kiosk", state: "parts-sourced", description: "Touch-triggered listening kiosk, record-shop aesthetic." },
+  { id: "h3", name: "MQTT / Node-RED Middleware", state: "circuit-built", description: "Message bus between sensors and the FIELD app UI." },
+  { id: "h4", name: "Capacitive Touch Panel", state: "ui-connected", description: "Wood-panel touch strip triggering screen transitions." },
+];
+
+export const BOM_SEED = [
+  { id: "b1", part: "ESP32-WROOM-32", type: "Microcontroller", pinout: "GPIO 4/5 (I2C)", baud: "115200", cad: "v0.3", notes: "Primary node MCU" },
+  { id: "b2", part: "MPR121 Capacitive Sensor", type: "Sensor", pinout: "I2C 0x5A", baud: "—", cad: "v0.1", notes: "12-channel touch input" },
+  { id: "b3", part: "28BYJ-48 Stepper", type: "Actuator", pinout: "GPIO 12/13/14/15", baud: "—", cad: "v0.2", notes: "Motorized stand rotation" },
+];
+
+// --- 4. Future Vision: Listening Cafe Commune — Zone Map + Asset Vault ---
+
+export const ZONE_DEFS = [
+  { id: "interiors-acoustics", title: "Interiors & Acoustics" },
+  { id: "furniture-automation", title: "Custom Hardware / Furniture Automation" },
+  { id: "workshops-community", title: "Workshops & Creative Community" },
+  { id: "operations-business", title: "Operations & Business Model" },
+];
+
+export const ZONES_SEED = {
+  "interiors-acoustics": {
+    tags: ["#spatial-layout", "#lighting"],
+    milestones: [
+      { id: "z1", label: "Mood board: spatial + lighting direction", done: true },
+      { id: "z2", label: "Acoustic zoning study", done: false },
+    ],
+  },
+  "furniture-automation": {
+    tags: ["#furniture-mechanism"],
+    milestones: [
+      { id: "z3", label: "Modular seating mechanism sketch", done: false },
+      { id: "z4", label: "Prototype reconfigurable table", done: false },
+    ],
+  },
+  "workshops-community": {
+    tags: ["#community-format"],
+    milestones: [
+      { id: "z5", label: "Draft monthly listening + sketch night format", done: true },
+      { id: "z6", label: "List 5 potential collaborator studios", done: false },
+    ],
+  },
+  "operations-business": {
+    tags: [],
+    milestones: [
+      { id: "z7", label: "Write concept one-pager", done: true },
+      { id: "z8", label: "Shortlist 3 candidate neighborhoods", done: false },
+    ],
+  },
+};
+
+export const ASSET_VAULT_SEED = [
+  { id: "a1", title: "Modular low seating", note: "Reconfigures for listening sessions vs. work-in-cafe mode.", tag: "#furniture-mechanism", imageUrl: "" },
+  { id: "a2", title: "Acoustic zoning reference", note: "Soft partition walls between listening zone and cafe counter.", tag: "#spatial-layout", imageUrl: "" },
+];
+
+export const TASK_SEED = [
+  { id: "t1", title: "Finish 3D Product Website case study copy", subjectId: "portfolio-web", priority: "high", done: false },
+  { id: "t2", title: "Film: tactile hover animation micro-tutorial", subjectId: "content", priority: "high", done: false },
+  { id: "t3", title: "Order ESP32 + haptic motor prototyping kit", subjectId: "hardware", priority: "medium", done: false },
+  { id: "t4", title: "Draft studio site pricing page (course-credit framing)", subjectId: "portfolio-web", priority: "medium", done: true },
+  { id: "t5", title: "Sketch mood board direction for cafe seating", subjectId: "cafe", priority: "low", done: false },
+];

@@ -1,10 +1,13 @@
 @import "tailwindcss";
+@import "@eleven-labs/design-system/style.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Palette + type scale adopted from @eleven-labs/design-system design tokens
+   (github.com/eleven-labs/design-system/tree/main/src/designTokens). */
 @theme {
-  --font-display: "Fraunces", ui-serif, Georgia, serif;
-  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Agdasima", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
 
   --color-paper: #faf8f2;
@@ -14,19 +17,27 @@
   --color-line: #e4e0d6;
 
   --color-paper-dark: #0c0c10;
-  --color-paper-raised-dark: #151519;
+  --color-paper-raised-dark: #17191f;
   --color-ink-dark: #f3f1e9;
   --color-ink-soft-dark: #9a9aa2;
   --color-line-dark: #232329;
 
-  --color-brand: #2c3a8c;
-  --color-brand-soft: #e7e9f7;
-  --color-clay: #c1502e;
-  --color-clay-soft: #f8e4da;
-  --color-sage: #6f8763;
-  --color-sage-soft: #e6ece2;
-  --color-gold: #b8862e;
-  --color-gold-soft: #f5ead2;
+  /* eleven-labs/design-system: color.tokens.json */
+  --color-primary: #0a4084;
+  --color-primary-dark: #194180;
+  --color-primary-very-dark: #093670;
+  --color-secondary: #e9f1f8;
+  --color-secondary-dark: #c5d3e9;
+  --color-info: #dd3156;
+  --color-info-soft: #fbe2e7;
+  --color-accent: #f8fa9b;
+  --color-accent-soft: #fcfde0;
+  --color-graphite: #333333;
+  --color-graphite-soft: #ededed;
+  --color-grey: #9b9b9b;
+  --color-grey-light: #c4c4c4;
+  --color-grey-ultralight: #ededed;
+  --color-grey-dark: #757575;
 }
 
 html {
@@ -74,10 +85,21 @@ body {
     background-color: var(--color-paper-raised-dark);
     border-color: var(--color-line-dark);
   }
+
+  /* book spine page-edge effect, used by BookCard */
+  .book-pages {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.16) 0px,
+      rgba(0, 0, 0, 0.16) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  }
 }
 
 ::selection {
-  background-color: var(--color-brand);
+  background-color: var(--color-primary);
   color: white;
 }
 

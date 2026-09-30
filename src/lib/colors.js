@@ -1,61 +1,79 @@
 // Literal Tailwind class names per subject color — written out in full
 // (not built with template strings) so Tailwind's scanner can find them.
+// Palette sourced from @eleven-labs/design-system color tokens.
+//
+// `text` is for use directly on the page/card background (adapts per
+// theme). `chipText` is for use on top of `bgSoft`, which stays a light
+// pastel in both themes — so chipText is a fixed dark color, never
+// theme-adaptive, or it goes invisible in dark mode.
 export const COLOR_MAP = {
-  brand: {
-    text: "text-brand",
-    bg: "bg-brand",
-    bgSoft: "bg-brand-soft",
-    border: "border-brand",
-    ring: "ring-brand",
-    dot: "bg-brand",
+  primary: {
+    text: "text-primary",
+    chipText: "text-primary",
+    bg: "bg-primary",
+    bgSoft: "bg-secondary",
+    border: "border-primary",
+    ring: "ring-primary",
+    dot: "bg-primary",
+    spine: "bg-primary",
   },
-  clay: {
-    text: "text-clay",
-    bg: "bg-clay",
-    bgSoft: "bg-clay-soft",
-    border: "border-clay",
-    ring: "ring-clay",
-    dot: "bg-clay",
+  info: {
+    text: "text-info",
+    chipText: "text-info",
+    bg: "bg-info",
+    bgSoft: "bg-info-soft",
+    border: "border-info",
+    ring: "ring-info",
+    dot: "bg-info",
+    spine: "bg-info",
   },
-  sage: {
-    text: "text-sage",
-    bg: "bg-sage",
-    bgSoft: "bg-sage-soft",
-    border: "border-sage",
-    ring: "ring-sage",
-    dot: "bg-sage",
+  graphite: {
+    // graphite (#333) is too close to the dark-mode card background to
+    // read on its own, so swap to a light color once .dark is active.
+    text: "text-graphite dark:text-ink-dark",
+    chipText: "text-graphite",
+    bg: "bg-graphite",
+    bgSoft: "bg-graphite-soft",
+    border: "border-graphite",
+    ring: "ring-graphite",
+    dot: "bg-graphite",
+    spine: "bg-graphite",
   },
-  gold: {
-    text: "text-gold",
-    bg: "bg-gold",
-    bgSoft: "bg-gold-soft",
-    border: "border-gold",
-    ring: "ring-gold",
-    dot: "bg-gold",
+  accent: {
+    // on a card/page background, swap to the accent hue itself in dark
+    // mode (graphite would be unreadably close to the dark background).
+    text: "text-graphite dark:text-accent",
+    chipText: "text-graphite",
+    bg: "bg-accent",
+    bgSoft: "bg-accent-soft",
+    border: "border-accent",
+    ring: "ring-accent",
+    dot: "bg-accent",
+    spine: "bg-accent",
   },
 };
 
 export function colorClasses(color) {
-  return COLOR_MAP[color] ?? COLOR_MAP.brand;
+  return COLOR_MAP[color] ?? COLOR_MAP.primary;
 }
 
 export const PRIORITY_STYLES = {
   high: {
     label: "High",
-    dot: "bg-clay",
-    text: "text-clay",
-    bg: "bg-clay-soft",
+    dot: "bg-info",
+    text: "text-info",
+    bg: "bg-info-soft",
   },
   medium: {
     label: "Medium",
-    dot: "bg-gold",
-    text: "text-gold",
-    bg: "bg-gold-soft",
+    dot: "bg-primary",
+    text: "text-primary",
+    bg: "bg-secondary",
   },
   low: {
     label: "Low",
-    dot: "bg-sage",
-    text: "text-sage",
-    bg: "bg-sage-soft",
+    dot: "bg-grey-dark",
+    text: "text-grey-dark",
+    bg: "bg-grey-ultralight",
   },
 };

@@ -1,25 +1,12 @@
 import { createContext, useContext, useMemo } from "react";
 import { useLocalStorage } from "../lib/useLocalStorage";
 import { makeId } from "../lib/id";
-import { SUBJECT_DEFS, NOTE_SEED, TASK_SEED } from "../data/seedData";
+import { SUBJECT_DEFS, TASK_SEED } from "../data/seedData";
 
 const AppContext = createContext(null);
 
-function buildInitialSubjects() {
-  return SUBJECT_DEFS.map((s) => ({
-    ...s,
-    notes: (NOTE_SEED[s.id] ?? []).map((n) => ({
-      ...n,
-      createdAt: new Date().toISOString(),
-    })),
-  }));
-}
-
 export function AppProvider({ children }) {
-  const [subjects, setSubjects] = useLocalStorage(
-    "lc:subjects",
-    buildInitialSubjects,
-  );
+  const [subjects, setSubjects] = useLocalStorage("lc:subjects:v2", SUBJECT_DEFS);
   const [tasks, setTasks] = useLocalStorage("lc:tasks", TASK_SEED);
   const [theme, setTheme] = useLocalStorage("lc:theme", "dark");
 
@@ -27,9 +14,7 @@ export function AppProvider({ children }) {
     () => ({
       toggleTask(taskId) {
         setTasks((prev) =>
-          prev.map((t) =>
-            t.id === taskId ? { ...t, done: !t.done } : t,
-          ),
+          prev.map((t) => (t.id === taskId ? { ...t, done: !t.done } : t)),
         );
       },
       addTask({ title, subjectId, priority }) {
@@ -51,51 +36,17 @@ export function AppProvider({ children }) {
       clearCompletedTasks() {
         setTasks((prev) => prev.filter((t) => !t.done));
       },
-      addNote(subjectId, { content, tags }) {
-        if (!content.trim()) return;
-        setSubjects((prev) =>
-          prev.map((s) =>
-            s.id === subjectId
-              ? {
-                  ...s,
-                  notes: [
-                    {
-                      id: makeId(),
-                      content: content.trim(),
-                      tags: tags ?? [],
-                      createdAt: new Date().toISOString(),
-                    },
-                    ...s.notes,
-                  ],
-                }
-              : s,
-          ),
-        );
-      },
-      deleteNote(subjectId, noteId) {
-        setSubjects((prev) =>
-          prev.map((s) =>
-            s.id === subjectId
-              ? { ...s, notes: s.notes.filter((n) => n.id !== noteId) }
-              : s,
-          ),
-        );
-      },
-      toggleMilestone(subjectId, milestoneId) {
-        setSubjects((prev) =>
-          prev.map((s) => {
-            if (s.id !== subjectId) return s;
-            const milestones = s.milestones.map((m) =>
-              m.id === milestoneId ? { ...m, done: !m.done } : m,
-            );
-            const done = milestones.filter((m) => m.done).length;
-            const progress = Math.round((done / milestones.length) * 100);
-            return { ...s, milestones, progress };
-          }),
-        );
-      },
       toggleTheme() {
         setTheme((t) => (t === "dark" ? "light" : "dark"));
+      },
+      // Each bespoke subject layout owns its own data, but reports a single
+      // 0-100 progress number back up so Home's overview stays in sync.
+      updateSubjectProgress(subjectId, progress) {
+        setSubjects((prev) =>
+          prev.map((s) =>
+            s.id === subjectId && s.progress !== progress ? { ...s, progress } : s,
+          ),
+        );
       },
     }),
     [setTasks, setSubjects, setTheme],

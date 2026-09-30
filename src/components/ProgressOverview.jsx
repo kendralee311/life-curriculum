@@ -25,10 +25,10 @@ export function ProgressOverview() {
   }));
 
   return (
-    <section className="card-surface rounded-2xl p-5 sm:p-6">
+    <section className="card-surface rounded-sm p-5 sm:p-6">
       <div className="flex items-center gap-2">
-        <Award size={18} className="text-gold" />
-        <h2 className="font-display text-lg font-semibold">Graduation Credits</h2>
+        <Award size={18} className="text-primary" />
+        <h2 className="font-display text-xl font-bold uppercase tracking-tight">Graduation Credits</h2>
       </div>
       <p className="mt-1 text-sm text-ink-soft dark:text-ink-soft-dark">
         Overall progress toward launching the business and building the venue.
@@ -40,7 +40,7 @@ export function ProgressOverview() {
             value={overall}
             size={128}
             strokeWidth={10}
-            colorClass="text-brand"
+            colorClass="text-primary"
             sublabel="Overall"
           />
         </div>
@@ -57,8 +57,8 @@ export function ProgressOverview() {
               <PolarRadiusAxis domain={[0, 100]} tick={false} axisLine={false} />
               <Radar
                 dataKey="progress"
-                stroke="#2c3a8c"
-                fill="#2c3a8c"
+                stroke="#0a4084"
+                fill="#0a4084"
                 fillOpacity={0.35}
               />
             </RadarChart>

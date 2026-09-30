@@ -2,10 +2,11 @@ export function ProgressRing({
   value,
   size = 96,
   strokeWidth = 8,
-  colorClass = "text-brand",
+  colorClass = "text-primary",
   trackClass = "text-line dark:text-line-dark",
   label,
   sublabel,
+  labelClass = "font-display text-xl font-semibold leading-none",
 }) {
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
@@ -39,7 +40,7 @@ export function ProgressRing({
         />
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <span className="font-display text-xl font-semibold leading-none">{label ?? `${Math.round(value)}%`}</span>
+        <span className={labelClass}>{label ?? `${Math.round(value)}%`}</span>
         {sublabel && (
           <span className="mt-1 text-[10px] uppercase tracking-wide text-ink-soft dark:text-ink-soft-dark">
             {sublabel}
